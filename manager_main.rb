@@ -43,12 +43,12 @@ class ManagerMain
 		all_hotels = []  #local var for storing hotels
 
 		hotel_data=File.open("hotels.txt", "r")
-			content = File.read("users.txt").split("},{")
+			content = File.read("hotels.txt").split("},{")
 			#It has problem like first and last element of content
 			#has [{ | }] . so we have to write logic for removing that.
 
 			content.each do |hotel|
-				hotel =JSON.parse(hotel)
+				hotel =JSON.parse(hotel)  #apply condition later based on manager 
 				all_hotels << hotel[hotel_name]
 			end
 		hotel_data.close
@@ -56,8 +56,7 @@ class ManagerMain
 		selected_option = prompt.select("Please choose an option:", all_hotels)
 		puts "You selected: #{selected_option}"
 
-		
-
+		#make a method for hotel and then call
 	end
 end
 
