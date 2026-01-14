@@ -14,6 +14,8 @@ class MainFollow
 	
 end
 
+# make it according to manager_main selection based on terminal
+
 puts "Hotel Booking System"
 puts "1. Login \n 2. Signup"
 auth_choice= gets

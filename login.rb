@@ -12,6 +12,11 @@ class Login
 				user =JSON.parse(user)
 				if(user[email] == @email && user[password] == @password)
 					puts "Login Successfully."
+					if(user[role] == "manager")
+						#send him to manager (user[name])
+					else 
+						#send him to user (user[name])
+					end
 				else
 					puts "Invalid Credentials..."
 				end
@@ -27,3 +32,4 @@ puts "Enter your Password"
 password = gets
 
 login_o = Login.new
+login_o.login_details(email, password)

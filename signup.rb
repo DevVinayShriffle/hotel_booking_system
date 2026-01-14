@@ -1,6 +1,6 @@
 class Signup
 	def signup_details(name, email, password, role)
-		@name, @email, @password, @role = name, email, password, role
+		@name, @email, @password, @role = name, email, password, role.downcase
 		#import users.txt here
 		
 		user_data=File.open("users.txt", "a+")
