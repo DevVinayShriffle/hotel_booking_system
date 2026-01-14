@@ -1,0 +1,1 @@
+1|Hotel Blue|standard|2000|10|10

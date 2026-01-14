@@ -1,0 +1,1 @@
+1|Hotel Blue|Delhi|manager_email@gmail.com
