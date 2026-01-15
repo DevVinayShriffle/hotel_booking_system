@@ -10,12 +10,12 @@ class Login
             if (user[2] == email && user[3] == password.strip)
                 is_present = true
                 puts "Login Successfully."
-                if (user[4] == manager)
-                    require_relative '../manager/manager_main.rb'
-                    ManagerMain.new(user[2]).menu
-                elsif (user[4] == customer)
-                    require_relative "../customer/customer_main"
-                    CustomerMain.new(parts[2]).menu
+                if (user[4] == "manager")
+                    require_relative '../manager/manager'
+                    Manager.new(user[2]).menu
+                elsif (user[4] == "customer")
+                    require_relative "../customer/customer"
+                    Customer.new(user[2]).menu
                 end
             end
         end

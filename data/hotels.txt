@@ -1,1 +1,4 @@
 1|Hotel Blue|Delhi|manager_email@gmail.com
+2|Radison delux|Mumbai|vinay@gmail.com
+3|Tata Suite|Delhi|vinay@gmail.com
+4|Taj hotel|Bhopal|vinay@gmail.com

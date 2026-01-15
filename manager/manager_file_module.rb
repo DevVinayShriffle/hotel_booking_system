@@ -1,7 +1,7 @@
 module ManagerFileModule
-    HOTELS_FILE = '../data/hotels.txt'
-    ROOMS_FILE = '../data/rooms.txt'
-    BookingS_FILE = '../data/bookings.txt'
+    HOTELS_FILE = 'data/hotels.txt'
+    ROOMS_FILE = 'data/rooms.txt'
+    BookingS_FILE = 'data/bookings.txt'
 
     def read_file(file)
         data = []

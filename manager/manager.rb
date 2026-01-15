@@ -1,23 +1,25 @@
 require_relative 'manager_file_module'
-class ManagerMain
+class Manager
     include ManagerFileModule
     def initialize (email)
         @manager_email = email
     end
 
     def menu
-        puts "Manager menu: "
+        puts "\nManager menu: "
         puts "1. Create Hotels"
         puts "2. View My Hotels"
         puts "3. Logout"
 
-        choice = gets.chomp
-        if (choice == "1")
+        choice = gets.chomp.to_i
+        if (choice == 1)
             create_hotels
-        elsif (choice == "2")
+        elsif (choice == 2)
             show_my_hotels
-        elsif
+        elsif (choice == 3)
             puts "Logout Successfully"
+            require_relative "../main"
+            Main.new.main
         else
             puts "Invalid Choice"
             menu
@@ -39,6 +41,9 @@ class ManagerMain
        
        append_file(HOTELS_FILE, data)
        puts "Hotel created successfully."
+       menu
+    rescue
+        menu
     end
 
 
@@ -48,7 +53,7 @@ class ManagerMain
 
         hotels.each do |hotel|
             data = hotel.split("|")
-            my_hotels << data if parts[3] == @manager_email
+            my_hotels << data if data[3].include?(@manager_email)
         end
 
         if my_hotels.empty?
@@ -57,7 +62,7 @@ class ManagerMain
             return
         end
 
-        puts "Your Hotels:"
+        puts "\nYour Hotels:"
         my_hotels.each_with_index do |h, i|
             puts "#{i + 1}. #{h[1]} (#{h[2]})"
         end
@@ -71,24 +76,25 @@ class ManagerMain
             puts "Invalid selection"
             menu
         end
+        
     end
 
     def hotel_dashboard(hotel_name)
-        puts "Hotel: #{hotel_name}"
+        puts "\nHotel: #{hotel_name}"
         puts "1. View Room Stats"
         puts "2. Create Room"
         puts "3. Back"
 
-        choice = gets.chomp
+        choice = gets.chomp.to_i
 
-        if choice == "1"
+        if choice == 1
             room_stats(hotel_name)
-        elsif choice == "2"
+        elsif choice == 2
             create_room(hotel_name)
-        elsif choice == "3"
+        elsif choice == 3
             menu
         else
-            puts "Invalid choice"
+            puts 'Invalid choice'
             hotel_dashboard(hotel_name)
         end
     end
@@ -117,7 +123,7 @@ class ManagerMain
 
     def room_stats(hotel_name)
         rooms = read_file(ROOMS_FILE)
-        bookings = read_file(BOOKINGS_FILE)
+        bookings = read_file(BookingS_FILE)
 
         total_rooms = 0
         available_rooms = 0
@@ -149,5 +155,6 @@ class ManagerMain
 
 
 end
+
 
 # 1|Hotel Blue|Delhi|manager_email@gmail.com

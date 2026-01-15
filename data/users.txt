@@ -1,2 +1,3 @@
-1|Vinay Kumar Sahu|vinay@gmail.com|1234|manager
+1|Vinay Kumar Sahu|vinay@gmail.com|1234|customer
 2|Lav Kush Sahu|lav@gmail.com|2580|customer
+3|Krishna|krish@gmail.com|1470|manager

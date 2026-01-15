@@ -1,6 +1,6 @@
 require_relative 'customer_file_module'
 
-class CustomerMain
+class Customer
   include CustomerFileModule
 
   def initialize(customer_email)
@@ -14,89 +14,100 @@ class CustomerMain
     puts "3. Cancelled Bookings"
     puts "4. Logout"
 
-    choice = gets.chomp
+    choice = gets.chomp.to_i
 
-    if choice == "1"
+    case choice
+    when 1
       view_hotels
-    elsif choice == "2"
+    when 2
       view_bookings
-    elsif choice == "3"
+    when 3
       view_cancelled_bookings
-    elsif choice == "4"
-      puts "Logged out"
+    when 4
+      puts 'Logged out'
+      require_relative "../main"
+      Main.new.main
     else
-      puts "Invalid choice"
+      puts 'Invalid choice'
       menu
-    end
+    end 
   end
 
-    def view_hotels
-    hotels = read_file(HOTELS_FILE)
+  def view_hotels
+      hotels = read_file(HOTELS_FILE)
 
-    if hotels.empty?
-      puts "No hotels available"
-      menu
-      return
-    end
-
-    puts "\nHotels:"
-    hotels.each_with_index do |h, i|
-      parts = h.split("|")
-      puts "#{i + 1}. #{parts[1]} (#{parts[2]})"
-    end
-
-    puts "Select hotel number:"
-    index = gets.chomp.to_i - 1
-
-    if hotels[index]
-      hotel_name = hotels[index].split("|")[1]
-      show_rooms(hotel_name)
-    else
-      puts "Invalid selection"
-      menu
-    end
-  end
-
-
-    def show_rooms(hotel_name)
-    rooms = read_file(ROOMS_FILE)
-    available = []
-
-    puts "\nAvailable Rooms in #{hotel_name}:"
-
-    rooms.each do |room|
-      parts = room.split("|")
-      if parts[1] == hotel_name && parts[5].to_i > 0
-        available << parts
-        puts "#{available.length}. #{parts[2]} | Price: #{parts[3]} | Available: #{parts[5]}"
+      if hotels.empty?
+        puts "No hotels available"
+        menu
+        return
       end
-    end
 
-    if available.empty?
-      puts "No rooms available"
-      menu
-      return
-    end
+      puts "\nHotels:"
+      hotels.each_with_index do |h, i|
+        parts = h.split("|")
+        puts "#{i + 1}. #{parts[1]} (#{parts[2]})"
+      end
 
-    puts "Select room number to book:"
-    index = gets.chomp.to_i - 1
+      puts "Select hotel number:"
+      index = gets.chomp.to_i - 1
 
-    if available[index]
-      book_room(hotel_name, available[index])
-    else
-      puts "Invalid choice"
-      menu
-    end
+      if hotels[index]
+        hotel_name = hotels[index].split("|")[1]
+        show_rooms(hotel_name)
+      else
+        puts "Invalid selection"
+        menu
+      end
+  end
+
+
+  def show_rooms(hotel_name)
+      rooms = read_file(ROOMS_FILE)
+      if rooms.empty?
+        puts "No rooms available"
+        menu
+        return
+      end
+
+      available = []
+
+      puts "\nAvailable Rooms in #{hotel_name}:"
+
+      rooms.each do |room|
+        parts = room.split("|")
+        if parts[1] == hotel_name && parts[5].to_i > 0
+          available << parts
+          puts "#{available.length}. #{parts[2]} | Price: #{parts[3]} | Available: #{parts[5]}"
+        end
+      end
+
+      if available.empty?
+        puts "No rooms available"
+        menu
+        return
+      end
+
+      puts "Select room to book:"
+      index = gets.chomp.to_i - 1
+
+      if available[index]
+        book_room(hotel_name, available[index])
+      else
+        puts "Invalid choice"
+        menu
+      end
   end
 
 
 
-    def book_room(hotel_name, room)
+  def book_room(hotel_name, room)
     puts "Enter Check-in Date (YYYY-MM-DD):"
     check_in = gets.chomp
+    puts check_in.class
 
     puts "Enter Check-out Date (YYYY-MM-DD):"
     check_out = gets.chomp
+    puts check_out.class
 
     bookings = read_file(BOOKINGS_FILE)
     booking_id = bookings.length + 1
@@ -106,13 +117,14 @@ class CustomerMain
 
     update_room_availability(hotel_name, room[2], -1)
 
-    puts "Booking successful"
+    total_amount = (check_out-check_in)*rooms[3]
+    puts "Booking successful and Bill: $#{total_amount}"
     menu
   end
 
 
 
-    def view_bookings
+  def view_bookings
     bookings = read_file(BOOKINGS_FILE)
     my_bookings = []
 
@@ -144,7 +156,7 @@ class CustomerMain
 
 
 
-    def cancel_booking(booking_id)
+  def cancel_booking(booking_id)
     bookings = read_file(BOOKINGS_FILE)
     updated = []
 
@@ -165,7 +177,7 @@ class CustomerMain
 
 
 
-    def view_cancelled_bookings
+  def view_cancelled_bookings
     bookings = read_file(BOOKINGS_FILE)
 
     puts "\nCancelled Bookings:"
@@ -180,22 +192,21 @@ class CustomerMain
   end
 
 
+  def update_room_availability(hotel, room_type, change)
+      rooms = read_file(ROOMS_FILE)
+      updated = []
 
-    def update_room_availability(hotel, room_type, change)
-    rooms = read_file(ROOMS_FILE)
-    updated = []
-
-    rooms.each do |r|
-      parts = r.split("|")
-      if parts[1] == hotel && parts[2] == room_type
-        parts[5] = (parts[5].to_i + change).to_s
+      rooms.each do |r|
+        parts = r.split("|")
+        if parts[1] == hotel && parts[2] == room_type
+          parts[5] = (parts[5].to_i + change).to_s
+        end
+        updated << parts.join("|")
       end
-      updated << parts.join("|")
-    end
 
-    write_all(ROOMS_FILE, updated)
+      write_all(ROOMS_FILE, updated)
   end
+
 end
 
 
-end

@@ -17,6 +17,8 @@ class Signup
 
         write_user(user_data)
         puts "User Registered Successfully."
+        require_relative "../main"
+        Main.new.main
 
     end
 end
