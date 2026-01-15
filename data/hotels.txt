@@ -2,3 +2,7 @@
 2|Radison delux|Mumbai|vinay@gmail.com
 3|Tata Suite|Delhi|vinay@gmail.com
 4|Taj hotel|Bhopal|vinay@gmail.com
+5|hotel siddhivinayak|Bhopal|ganesh@gmail.com
+6|8|5|vinay@gmail.com
+7|Sunflower hotel|USA|vinay@gmail.com
+8|Sand Martin Hotel|Bhopal|vinay@gmail.com

@@ -9,18 +9,18 @@ class Login
             user = data.split("|")
             if (user[2] == email && user[3] == password.strip)
                 is_present = true
-                puts "Login Successfully."
-                if (user[4] == "manager")
+                puts 'Login Successfully.'
+                if (user[4] == 'manager')
                     require_relative '../manager/manager'
                     Manager.new(user[2]).menu
-                elsif (user[4] == "customer")
-                    require_relative "../customer/customer"
+                elsif (user[4] == 'customer')
+                    require_relative '../customer/customer'
                     Customer.new(user[2]).menu
                 end
             end
         end
 
-        puts "Invalid Credentials." unless is_present
+        puts 'Invalid email or password.' unless is_present
         nil
     end
 end

@@ -1,5 +1,5 @@
 module UserFileModule
-    USERS_FILE = "data/users.txt"
+    USERS_FILE = 'data/users.txt'
     
     def read_users
         users = []

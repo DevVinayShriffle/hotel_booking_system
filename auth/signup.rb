@@ -6,7 +6,9 @@ class Signup
         users.each do |data|
             user = data.split("|")
             if(user[2] == email)
-                puts "Email already exist."
+                puts 'Email already exist.'
+                # return
+                Main.new.main
             end
         end
 
@@ -16,8 +18,8 @@ class Signup
         user_data = "#{id}|#{name}|#{email}|#{password}|#{role}"
 
         write_user(user_data)
-        puts "User Registered Successfully."
-        require_relative "../main"
+        puts "User Registered Successfully.\n"
+        
         Main.new.main
 
     end

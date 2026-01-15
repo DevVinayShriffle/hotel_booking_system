@@ -7,31 +7,45 @@ class Manager
 
     def menu
         puts "\nManager menu: "
-        puts "1. Create Hotels"
-        puts "2. View My Hotels"
-        puts "3. Logout"
+        puts '1. Create Hotels'
+        puts '2. View My Hotels'
+        puts '3. Logout'
 
         choice = gets.chomp.to_i
-        if (choice == 1)
+        case choice
+        when 1
             create_hotels
-        elsif (choice == 2)
+        when 2
             show_my_hotels
-        elsif (choice == 3)
-            puts "Logout Successfully"
-            require_relative "../main"
+        when 3
+            puts 'Logout Successfully'
+            require_relative '../main'
             Main.new.main
         else
-            puts "Invalid Choice"
+            puts 'Invalid Choice'
             menu
         end
+
+        # if (choice == 1)
+        #     create_hotels
+        # elsif (choice == 2)
+        #     show_my_hotels
+        # elsif (choice == 3)
+        #     puts 'Logout Successfully'
+        #     require_relative '../main'
+        #     Main.new.main
+        # else
+        #     puts 'Invalid Choice'
+        #     menu
+        # end
     end
 
 
     def create_hotels
-       puts "Enter Hotel Name " 
+       puts 'Enter Hotel Name ' 
        hotel_name = gets.chomp
 
-       puts "Enter Location " 
+       puts 'Enter Location ' 
        location = gets.chomp
 
        hotels = read_file(HOTELS_FILE)
@@ -40,7 +54,7 @@ class Manager
        data = "#{hotel_id}|#{hotel_name}|#{location}|#{@manager_email}"
        
        append_file(HOTELS_FILE, data)
-       puts "Hotel created successfully."
+       puts 'Hotel created successfully.'
        menu
     rescue
         menu
@@ -57,7 +71,7 @@ class Manager
         end
 
         if my_hotels.empty?
-            puts "No hotels found"
+            puts 'No any hotels found'
             menu
             return
         end
@@ -67,13 +81,20 @@ class Manager
             puts "#{i + 1}. #{h[1]} (#{h[2]})"
         end
 
-        puts "Select hotel number:"
-        index = gets.chomp.to_i - 1
+        puts 'Select hotel number:'
+        puts 'If you want to exit Enter * key'
+        index = gets.chomp
 
+
+        if(index.strip == "*")
+            menu
+        end
+
+        index = index.to_i - 1
         if my_hotels[index]
             hotel_dashboard(my_hotels[index][1])
         else
-            puts "Invalid selection"
+            puts 'Invalid selection'
             menu
         end
         
@@ -81,33 +102,45 @@ class Manager
 
     def hotel_dashboard(hotel_name)
         puts "\nHotel: #{hotel_name}"
-        puts "1. View Room Stats"
-        puts "2. Create Room"
-        puts "3. Back"
+        puts '1. View Room Stats'
+        puts '2. Create Room'
+        puts '3. Back'
 
         choice = gets.chomp.to_i
 
-        if choice == 1
+        case choice
+        when 1
             room_stats(hotel_name)
-        elsif choice == 2
+        when 2
             create_room(hotel_name)
-        elsif choice == 3
+        when 3
             menu
         else
             puts 'Invalid choice'
             hotel_dashboard(hotel_name)
         end
+
+        # if choice == 1
+        #     room_stats(hotel_name)
+        # elsif choice == 2
+        #     create_room(hotel_name)
+        # elsif choice == 3
+        #     menu
+        # else
+        #     puts 'Invalid choice'
+        #     hotel_dashboard(hotel_name)
+        # end
     end
 
 
     def create_room(hotel_name)
-        puts "Room Type (standard/deluxe/suite):"
+        puts 'Room Type (standard/deluxe/suite):'
         room_type = gets.chomp.downcase
 
-        puts "Price per night:"
+        puts 'Price per night($):'
         price = gets.chomp
 
-        puts "Total rooms:"
+        puts 'Total rooms:'
         total = gets.chomp.to_i
 
         rooms = read_file(ROOMS_FILE)
@@ -116,7 +149,7 @@ class Manager
         data = "#{room_id}|#{hotel_name}|#{room_type}|#{price}|#{total}|#{total}"
         append_file(ROOMS_FILE, data)
 
-        puts "Room created successfully"
+        puts 'Room created successfully'
         hotel_dashboard(hotel_name)
     end
 
@@ -141,7 +174,7 @@ class Manager
         bookings.each do |b|
             parts = b.split("|")
             if parts[1] == hotel_name
-                parts[4] == "active" ? booking_count += 1 : cancel_count += 1
+                parts[4] == 'active' ? booking_count += 1 : cancel_count += 1
             end
         end
 
