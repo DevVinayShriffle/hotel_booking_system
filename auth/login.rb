@@ -13,6 +13,9 @@ class Login
                 if (user[4] == manager)
                     require_relative '../manager/manager_main.rb'
                     ManagerMain.new(user[2]).menu
+                elsif (user[4] == customer)
+                    require_relative "../customer/customer_main"
+                    CustomerMain.new(parts[2]).menu
                 end
             end
         end

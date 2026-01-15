@@ -1,1 +1,1 @@
-1|Hotel Blue|standard|customer@email.com|active
+1|Hotel Blue|standard|customer@email.com|2025-01-10|2025-01-12|active
