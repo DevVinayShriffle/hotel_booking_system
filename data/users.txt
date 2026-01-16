@@ -1,6 +1,6 @@
-1|Vinay Kumar Sahu|vinay@gmail.com|1234|manager
+1|Vinay Kumar Sahu|vinay@gmail.com|Vinay@12|manager
 2|Lav Kush Sahu|lav@gmail.com|2580|customer
 3|Krishna|krish@gmail.com|1470|manager
 4|Ganesh|ganesh@gmail.com|2346|manager
 5|vinay kumar sahu|vinay1@gmail.com|1463|customer
-6|vinay kumar sahu|sahu@gmail.com|4562|customer
+6|vinay@test|vinay12@gmail.com|Vinay@12|customer
