@@ -7,3 +7,4 @@
 7|Radison delux|standard|100|10|10
 8|Radison delux|delux|200|12|12
 9|Radison delux|suite|500|15|15
+10|Taj hotel|standard|100|18|18

@@ -6,3 +6,4 @@
 6|vinay@test|vinay12@gmail.com|Vinay@12|customer
 7|ganesh|ganesh12@gmail.com|Ganesh@1|customer
 8|happy|happy@gmail.com|Happy@12|customer
+9|saras|saras@gmail.com|Saras@12|customer
