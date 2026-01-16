@@ -104,7 +104,8 @@ class Manager
         puts "\nHotel: #{hotel_name}"
         puts '1. View Room Stats'
         puts '2. Create Room'
-        puts '3. Back'
+        puts '3. Add Room'
+        puts '4. Back'
 
         choice = gets.chomp.to_i
 
@@ -114,6 +115,8 @@ class Manager
         when 2
             create_room(hotel_name)
         when 3
+            add_room(hotel_name)
+        when 4
             menu
         else
             puts 'Invalid choice'
@@ -150,6 +153,55 @@ class Manager
         append_file(ROOMS_FILE, data)
 
         puts 'Room created successfully'
+        hotel_dashboard(hotel_name)
+    end
+
+
+    def add_room(hotel_name)
+        rooms = read_file(ROOMS_FILE)
+        hotel_rooms = []
+        rooms.each do |room|
+            parts = room.strip.split("|")
+            if parts[1] == hotel_name
+                hotel_rooms << parts
+            end
+        end
+        
+        if hotel_rooms.empty? 
+            puts 'No rooms found for this hotel'
+            hotel_dashboard(hotel_name)
+            return
+        end
+        
+        puts "\nRoom Types:"
+
+        hotel_rooms.each_with_index do |r, i|
+            puts "#{i + 1}. #{r[2]} | Total: #{r[4]} | Available: #{r[5]}"
+        end
+
+        puts 'Select room number to add rooms:'
+        index = gets.chomp.to_i - 1
+        if hotel_rooms[index].nil?
+            puts 'Invalid selection'
+            hotel_dashboard(hotel_name)
+            return
+        end
+
+        puts 'Enter number of rooms to add:'
+        add_count = gets.chomp.to_i
+        updated_rooms = []
+        rooms.each do |room|
+            parts = room.strip.split("|")
+                if parts[1] == hotel_name && parts[2] == hotel_rooms[index][2]
+                    parts[4] = (parts[4].to_i + add_count).to_s
+                    parts[5] = (parts[5].to_i + add_count).to_s
+                end
+            updated_rooms << parts.join("|")
+            end
+        File.open(ROOMS_FILE, 'w') do |f|
+            updated_rooms.each { |r| f.puts(r) }
+        end
+        puts 'Rooms added successfully'
         hotel_dashboard(hotel_name)
     end
 

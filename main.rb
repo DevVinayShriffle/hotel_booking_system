@@ -27,42 +27,42 @@ class Main
 			signup.signup_details(name, email, password, role)
 
 		elsif (choice == 2)
-			count = 1
-			begin
+			# count = 1
+			# begin
 				puts 'Enter your email'
 				email = gets.chomp
-				result = Validation.new.email_validation(email)
+			# 	result = Validation.new.email_validation(email)
 				
-				if(!result && count < 3)
-					puts 'Please enter a valid email address.'
-					count += 1
-				elsif(!result && count > 3)
-					puts 'You have reached maximum attempt.'
-					main
-				end
-				raise
-			rescue
-				retry
-			end
+			# 	if(!result && count < 3)
+			# 		puts 'Please enter a valid email address.'
+			# 		count += 1
+			# 		raise
+			# 	elsif(!result && count > 3)
+			# 		puts 'You have reached maximum attempt.'
+			# 		main
+			# 	end
+			# rescue
+			# 	retry
+			# end
 
-			count = 1
-			begin
+			# count = 1
+			# begin
 				puts 'Enter your Password'
 				password = gets.chomp
 
-				result = Validation.new.password_validation(password)
+			# 	result = Validation.new.password_validation(password)
 				
-				if(result == 0 && count < 3)
-					puts 'Password must have 6-8 characters long, one special character and a uppercase character.'
-					count += 1
-				else
-					puts 'You have reached maximum attempt.'
-					main
-				end
-				raise
-			rescue
-				retry
-			end
+			# 	if(result == 0 && count < 3)
+			# 		puts 'Password must have 6-8 characters long, one special character and a uppercase character.'
+			# 		count += 1
+			# 		raise
+			# 	else
+			# 		puts 'You have reached maximum attempt.'
+			# 		main
+			# 	end
+			# rescue
+			# 	retry
+			# end
 
 			login = Login.new
 			login.login_details(email, password)

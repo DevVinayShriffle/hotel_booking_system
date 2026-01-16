@@ -1,8 +1,9 @@
 1|Hotel Blue|standard|2000|10|6
-2|Radison delux|deluxe|1000|10|9
-3|Radison delux|suite|1000|10|9
 4|hotel siddhivinayak|standard|500|5|5
 5|Sunflower hotel|suite|600|10|10
 6|8|standard|100|20|19
 7|Taj hotel|deluxe|500|5|5
 8|Taj hotel|deluxe|500|5|5
+7|Radison delux|standard|100|10|10
+8|Radison delux|delux|200|12|12
+9|Radison delux|suite|500|15|15
