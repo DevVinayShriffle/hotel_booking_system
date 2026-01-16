@@ -25,7 +25,6 @@ class Customer
       view_cancelled_bookings
     when 4
       puts 'Logged out'
-      require_relative '../main'
       Main.new.main
     else
       puts 'Invalid choice'
@@ -205,22 +204,21 @@ class Customer
     menu
   end
 
-#check and change logic here
+
   def update_room_availability(hotel, room_type, change)
-      rooms = read_file(ROOMS_FILE)
-      updated = []
+    rooms = read_file(ROOMS_FILE)
+    updated = []
 
-      rooms.each do |r|
-        parts = r.split("|")
-        if parts[1] == hotel && parts[2] == room_type
-          parts[5] = (parts[5].to_i + change).to_s
-        end
-        updated << parts.join("|")
+    rooms.each do |r|
+    parts = r.split("|")
+      if parts[1] == hotel && parts[2] == room_type
+        parts[5] = (parts[5].to_i + change).to_s
       end
+      updated << parts.join("|")
+    end
 
-      write_all(ROOMS_FILE, updated)
+    write_all(ROOMS_FILE, updated)
   end
-
 end
 
 
