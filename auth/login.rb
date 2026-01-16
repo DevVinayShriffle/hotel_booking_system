@@ -21,6 +21,7 @@ class Login
         end
 
         puts 'Invalid email or password.' unless is_present
+        Main.new.main
         nil
     end
 end

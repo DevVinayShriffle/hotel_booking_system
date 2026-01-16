@@ -6,3 +6,4 @@
 6|8|5|vinay@gmail.com
 7|Sunflower hotel|USA|vinay@gmail.com
 8|Sand Martin Hotel|Bhopal|vinay@gmail.com
+9|hotel sunshine|indore|vinay@gmail.com

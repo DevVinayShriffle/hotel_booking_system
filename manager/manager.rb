@@ -214,23 +214,25 @@ class Manager
         available_rooms = 0
         booking_count = 0
         cancel_count = 0
+        room_type = []
 
         rooms.each do |room|
             parts = room.split("|")
             if parts[1] == hotel_name
                 total_rooms += parts[4].to_i
                 available_rooms += parts[5].to_i
+                room_type << parts[2]
             end
         end
 
         bookings.each do |b|
             parts = b.split("|")
             if parts[1] == hotel_name
-                parts[4] == 'active' ? booking_count += 1 : cancel_count += 1
+                parts[6] == 'active' ? booking_count += 1 : cancel_count += 1
             end
         end
 
-        puts "\nTotal Rooms: #{total_rooms}"
+        puts "\nTotal Rooms: #{total_rooms} #{room_type}"
         puts "Available Rooms: #{available_rooms}"
         puts "Active Bookings: #{booking_count}"
         puts "Cancelled Bookings: #{cancel_count}"

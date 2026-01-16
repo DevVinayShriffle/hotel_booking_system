@@ -115,15 +115,17 @@ class Customer
     puts 'Enter Check-out Date (YYYY-MM-DD):'
     check_out = gets.chomp
 
+    total_amount = (check_out.slice(check_out.length-2, 2).to_i - check_in.slice(check_in.length-2, 2).to_i)*room[3].to_i
+
     bookings = read_file(BOOKINGS_FILE)
     booking_id = bookings.length + 1
 
-    line = "#{booking_id}|#{hotel_name}|#{room[2]}|#{@customer_email}|#{check_in}|#{check_out}|active"
+    line = "#{booking_id}|#{hotel_name}|#{room[2]}|#{@customer_email}|#{check_in}|#{check_out}|active|#{total_amount}"
     append_file(BOOKINGS_FILE, line)
 
     update_room_availability(hotel_name, room[2], -1)
 
-    total_amount = (check_out.slice(check_out.length-2, 2).to_i - check_in.slice(check_in.length-2, 2).to_i)*room[3].to_i
+    # total_amount = (check_out.slice(check_out.length-2, 2).to_i - check_in.slice(check_in.length-2, 2).to_i)*room[3].to_i
     puts "Booking successful and Bill: $#{total_amount}"
     menu
   end
@@ -139,7 +141,7 @@ class Customer
       parts = b.split("|")
       if parts[3] == @customer_email && parts[6] == "active"
         my_bookings << parts
-        puts "#{my_bookings.length}.  #{parts[1]} | #{parts[2]} | #{parts[4]} to #{parts[5]}"
+        puts "#{my_bookings.length}.  #{parts[1]} | #{parts[2]} | #{parts[4]} to #{parts[5]} | $#{parts[7]}"
       end
     end
 
