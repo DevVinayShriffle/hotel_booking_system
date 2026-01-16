@@ -1,8 +1,11 @@
-require_relative 'manager_file_module'
+# require_relative 'manager_file_module'
+require_relative '../loader'
+
 class Manager
-  include ManagerFileModule
+  # include ManagerFileModule
   def initialize (email)
     @manager_email = email
+    @role = "manager"
   end
 
   def menu
@@ -14,12 +17,12 @@ class Manager
     choice = gets.chomp.to_i
     case choice
     when 1
-      create_hotels
+      Hotel.new(@manager_email, @role).create
     when 2
       show_my_hotels
     when 3
       puts 'Logout Successfully'
-      require_relative '../main'
+      # require_relative '../main'
       Main.new.main
     else
       puts 'Invalid Choice'
@@ -28,40 +31,42 @@ class Manager
   end
 
 
-  def create_hotels
-   puts 'Enter Hotel Name ' 
-   hotel_name = gets.chomp
+  # def create_hotels
+  #  puts 'Enter Hotel Name ' 
+  #  hotel_name = gets.chomp
 
-   puts 'Enter Location ' 
-   location = gets.chomp
+  #  puts 'Enter Location ' 
+  #  location = gets.chomp
 
-   hotels = read_file(HOTELS_FILE)
-   hotel_id = hotels.length + 1
+  #  hotels = read_file(HOTELS_FILE)
+  #  hotel_id = hotels.length + 1
 
-   data = "#{hotel_id}|#{hotel_name}|#{location}|#{@manager_email}"
+  #  data = "#{hotel_id}|#{hotel_name}|#{location}|#{@manager_email}"
 
-   append_file(HOTELS_FILE, data)
-   puts 'Hotel created successfully.'
-   menu
-  rescue
-   menu
-  end
+  #  append_file(HOTELS_FILE, data)
+  #  puts 'Hotel created successfully.'
+  #  menu
+  # rescue
+  #  menu
+  # end
 
 
   def show_my_hotels
-    hotels = read_file(HOTELS_FILE)
-    my_hotels = []
+    # hotels = read_file(HOTELS_FILE)
+    # my_hotels = []
 
-    hotels.each do |hotel|
-      data = hotel.split("|")
-      my_hotels << data if data[3].include?(@manager_email)
-    end
+    # hotels.each do |hotel|
+    #   data = hotel.split("|")
+    #   my_hotels << data if data[3].include?(@manager_email)
+    # end
 
-    if my_hotels.empty?
-      puts 'No any hotels found'
-      menu
-      return
-    end
+    # if my_hotels.empty?
+    #   puts 'No any hotels found'
+    #   menu
+    #   return
+    # end
+
+    my_hotels = Hotel.new(@manager_email, @role).index
 
     puts "\nYour Hotels:"
     my_hotels.each_with_index do |h, i|
@@ -97,11 +102,12 @@ class Manager
 
     case choice
     when 1
-      room_stats(hotel_name)
+      # room_stats(hotel_name)
+      Room.new(@manager_email, @role).room_stats(hotel_name)
     when 2
-      create_room(hotel_name)
+      Room.new(@manager_email, @role).create(hotel_name)
     when 3
-      add_room(hotel_name)
+      Room.new(@manager_email , @role).update(hotel_name)
     when 4
       menu
     else
@@ -111,109 +117,109 @@ class Manager
   end
 
 
-  def create_room(hotel_name)
-    puts 'Room Type (standard/deluxe/suite):'
-    room_type = gets.chomp.downcase
+  # def create_room(hotel_name)
+  #   puts 'Room Type (standard/deluxe/suite):'
+  #   room_type = gets.chomp.downcase
 
-    puts 'Price per night($):'
-    price = gets.chomp
+  #   puts 'Price per night($):'
+  #   price = gets.chomp
 
-    puts 'Total rooms:'
-    total = gets.chomp.to_i
+  #   puts 'Total rooms:'
+  #   total = gets.chomp.to_i
 
-    rooms = read_file(ROOMS_FILE)
-    room_id = rooms.length + 1
+  #   rooms = read_file(ROOMS_FILE)
+  #   room_id = rooms.length + 1
 
-    data = "#{room_id}|#{hotel_name}|#{room_type}|#{price}|#{total}|#{total}"
-    append_file(ROOMS_FILE, data)
+  #   data = "#{room_id}|#{hotel_name}|#{room_type}|#{price}|#{total}|#{total}"
+  #   append_file(ROOMS_FILE, data)
 
-    puts 'Room created successfully'
-    hotel_dashboard(hotel_name)
-  end
-
-
-  def add_room(hotel_name)
-    rooms = read_file(ROOMS_FILE)
-    hotel_rooms = []
-    rooms.each do |room|
-      parts = room.strip.split("|")
-      if parts[1] == hotel_name
-        hotel_rooms << parts
-      end
-    end
-
-    if hotel_rooms.empty? 
-      puts 'No rooms found for this hotel'
-      hotel_dashboard(hotel_name)
-      return
-    end
-
-    puts "\nRoom Types:"
-
-    hotel_rooms.each_with_index do |r, i|
-      puts "#{i + 1}. #{r[2]} | Total: #{r[4]} | Available: #{r[5]}"
-    end
-
-    puts 'Select room number to add rooms:'
-    index = gets.chomp.to_i - 1
-    if hotel_rooms[index].nil?
-      puts 'Invalid selection'
-      hotel_dashboard(hotel_name)
-      return
-    end
-
-    puts 'Enter number of rooms to add:'
-    add_count = gets.chomp.to_i
-    updated_rooms = []
-    rooms.each do |room|
-      parts = room.strip.split("|")
-      if parts[1] == hotel_name && parts[2] == hotel_rooms[index][2]
-        parts[4] = (parts[4].to_i + add_count).to_s
-        parts[5] = (parts[5].to_i + add_count).to_s
-      end
-      updated_rooms << parts.join("|")
-    end
-    File.open(ROOMS_FILE, 'w') do |f|
-      updated_rooms.each { |r| f.puts(r) }
-    end
-    puts 'Rooms added successfully'
-    hotel_dashboard(hotel_name)
-  end
+  #   puts 'Room created successfully'
+  #   hotel_dashboard(hotel_name)
+  # end
 
 
-  def room_stats(hotel_name)
-    rooms = read_file(ROOMS_FILE)
-    bookings = read_file(BookingS_FILE)
+  # def add_room(hotel_name)
+  #   rooms = read_file(ROOMS_FILE)
+  #   hotel_rooms = []
+  #   rooms.each do |room|
+  #     parts = room.strip.split("|")
+  #     if parts[1] == hotel_name
+  #       hotel_rooms << parts
+  #     end
+  #   end
 
-    total_rooms = 0
-    available_rooms = 0
-    booking_count = 0
-    cancel_count = 0
-    room_type = []
+  #   if hotel_rooms.empty? 
+  #     puts 'No rooms found for this hotel'
+  #     hotel_dashboard(hotel_name)
+  #     return
+  #   end
 
-    rooms.each do |room|
-      parts = room.split("|")
-      if parts[1] == hotel_name
-        total_rooms += parts[4].to_i
-        available_rooms += parts[5].to_i
-        room_type << parts[2]
-      end
-    end
+  #   puts "\nRoom Types:"
 
-    bookings.each do |b|
-      parts = b.split("|")
-      if parts[1] == hotel_name
-        parts[6] == 'active' ? booking_count += 1 : cancel_count += 1
-      end
-    end
+  #   hotel_rooms.each_with_index do |r, i|
+  #     puts "#{i + 1}. #{r[2]} | Total: #{r[4]} | Available: #{r[5]}"
+  #   end
 
-    puts "\nTotal Rooms: #{total_rooms} #{room_type}"
-    puts "Available Rooms: #{available_rooms}"
-    puts "Active Bookings: #{booking_count}"
-    puts "Cancelled Bookings: #{cancel_count}"
+  #   puts 'Select room number to add rooms:'
+  #   index = gets.chomp.to_i - 1
+  #   if hotel_rooms[index].nil?
+  #     puts 'Invalid selection'
+  #     hotel_dashboard(hotel_name)
+  #     return
+  #   end
 
-    hotel_dashboard(hotel_name)
-  end
+  #   puts 'Enter number of rooms to add:'
+  #   add_count = gets.chomp.to_i
+  #   updated_rooms = []
+  #   rooms.each do |room|
+  #     parts = room.strip.split("|")
+  #     if parts[1] == hotel_name && parts[2] == hotel_rooms[index][2]
+  #       parts[4] = (parts[4].to_i + add_count).to_s
+  #       parts[5] = (parts[5].to_i + add_count).to_s
+  #     end
+  #     updated_rooms << parts.join("|")
+  #   end
+  #   File.open(ROOMS_FILE, 'w') do |f|
+  #     updated_rooms.each { |r| f.puts(r) }
+  #   end
+  #   puts 'Rooms added successfully'
+  #   hotel_dashboard(hotel_name)
+  # end
+
+
+  # def room_stats(hotel_name)
+  #   rooms = read_file(ROOMS_FILE)
+  #   bookings = read_file(BookingS_FILE)
+
+  #   total_rooms = 0
+  #   available_rooms = 0
+  #   booking_count = 0
+  #   cancel_count = 0
+  #   room_type = []
+
+  #   rooms.each do |room|
+  #     parts = room.split("|")
+  #     if parts[1] == hotel_name
+  #       total_rooms += parts[4].to_i
+  #       available_rooms += parts[5].to_i
+  #       room_type << parts[2]
+  #     end
+  #   end
+
+  #   bookings.each do |b|
+  #     parts = b.split("|")
+  #     if parts[1] == hotel_name
+  #       parts[6] == 'active' ? booking_count += 1 : cancel_count += 1
+  #     end
+  #   end
+
+  #   puts "\nTotal Rooms: #{total_rooms} #{room_type}"
+  #   puts "Available Rooms: #{available_rooms}"
+  #   puts "Active Bookings: #{booking_count}"
+  #   puts "Cancelled Bookings: #{cancel_count}"
+
+  #   hotel_dashboard(hotel_name)
+  # end
 end
 
 
