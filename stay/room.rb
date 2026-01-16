@@ -1,7 +1,9 @@
-# require_relative '../manager/manager_file_module'
+require_relative '../manager/manager_file_module'
 require_relative '../loader'
 
 class Room
+  # include CustomerFileModule
+  include ManagerFileModule
   def initialize (email, role)
     @email = email
     @role = role

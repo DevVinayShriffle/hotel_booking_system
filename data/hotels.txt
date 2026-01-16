@@ -9,3 +9,4 @@
 9|hotel sunshine|indore|vinay@gmail.com
 10|Hotel sadavihar|Kerala|vinay@gmail.com
 11|Hotel depth|UK|vinay@gmail.com
+12|Hotel Tailwind|UK|vinay@gmail.com
