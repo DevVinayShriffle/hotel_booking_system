@@ -1,10 +1,14 @@
 1|Vinay Kumar Sahu|vinay@gmail.com|Vinay@12|manager
 2|Lav Kush Sahu|lav@gmail.com|Lav@12|customer
 3|Krishna|krish@gmail.com|Kris@12|manager
-4|Ganesh|ganesh@gmail.com|2346|manager
+4|Ganesh|ganesh@gmail.com|Ganesh@1|manager
 5|vinay kumar sahu|vinay1@gmail.com|1463|customer
 6|vinay@test|vinay12@gmail.com|Vinay@12|customer
 7|ganesh|ganesh12@gmail.com|Ganesh@1|customer
 8|happy|happy@gmail.com|Happy@12|customer
 9|saras|saras@gmail.com|Saras@12|customer
 10|dev_test|test@gmail.com|Test@12|customer
+11|admin|admin@gmail.com|Admin@12|manager
+12|Tiger|tiger@gmail.com|Tiger@12|manager
+13|Satoshi|satoshi@gmail.com|Sat@12|customer
+14|Ram|Ram@gmail.com|Ram@12|manager

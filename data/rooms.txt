@@ -11,3 +11,6 @@
 11|Hotel Testing|deluxe|100|8|7
 12|Hotel Testing|suite|200|18|17
 13|Hotel Testing|standard|50|10|8
+14|Hotel Tastebud|standard|100|13|13
+15|Hotel Tastebud|deluxe|150|20|19
+16|Hotel Tastebud|suite|200|25|25

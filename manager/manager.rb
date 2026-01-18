@@ -12,7 +12,7 @@ class Manager
     puts '2. View My Hotels'
     puts '3. Logout'
 
-    choice = gets.chomp.to_i
+    choice = gets.chomp.strip.to_i
     case choice
     when 1
       Hotel.new(@manager_email, @role).create
@@ -37,7 +37,7 @@ class Manager
 
     puts 'Select hotel number:'
     puts 'If you want to exit Enter * or # key'
-    index = gets.chomp
+    index = gets.chomp.strip
 
     if(index.strip == "*" || index.strip == "#")
       menu
@@ -59,7 +59,7 @@ class Manager
     puts '3. Add Room'
     puts '4. Back'
 
-    choice = gets.chomp.to_i
+    choice = gets.chomp.strip.to_i
 
     case choice
     when 1

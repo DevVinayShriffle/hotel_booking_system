@@ -27,3 +27,5 @@
 27|Hotel Testing|standard|test@gmail.com|2026-12-01|2026-12-10|active|450
 28|Hotel Testing|deluxe|test@gmail.com|2026-01-05|2026-01-15|cancelled|1000
 29|Hotel Testing|deluxe|test@gmail.com|2026-02-06|2026-02-08|active|200
+30|Hotel Tastebud|standard|satoshi@gmail.com|2026-01-01|2026-01-21|cancelled|2000
+31|Hotel Tastebud|deluxe|satoshi@gmail.com|2025-12-12|2026-01-02|active|3150

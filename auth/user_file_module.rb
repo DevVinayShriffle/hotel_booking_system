@@ -3,18 +3,27 @@ module UserFileModule
   
   def read_users
     users = []
-    if File.exist?(USERS_FILE)
-      File.open(USERS_FILE, 'r') do |file|
-        IO.foreach(file) {|line| users << line.strip}
+    begin
+      if File.exist?(USERS_FILE)
+        File.open(USERS_FILE, 'r') do |file|
+          users = IO.readlines(file)
+        end
       end
+    rescue
+      puts "Unable to read file."
+      Main.new.main
     end
     users
   end
 
   def write_user(user_data)
-    File.open(USERS_FILE, 'a') do |file|
-      file.puts(user_data)
-    end
+    begin
+      File.open(USERS_FILE, 'a') do |file|
+        file.puts(user_data)
+      end
+    rescue
+      puts "Unable to find file."
+      Main.new.main
+    end 
   end
-
 end

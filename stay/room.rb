@@ -38,7 +38,12 @@ class Room
       end
 
       puts 'Select room_type to book:'
-      index = gets.chomp.to_i - 1
+      puts 'If you want to return then pleae enter * or #'
+      index = gets.chomp.strip
+      if(index == '*' || index == '#')
+        Customer.new(@email).menu
+      end
+      index = index.to_i - 1
 
       if available[index]
         book_room(hotel_name, available[index])
@@ -49,16 +54,83 @@ class Room
   end
 
   def create(hotel_name)
-    puts 'Room Type (standard/deluxe/suite):'
-    room_type = gets.chomp.strip.downcase
+    count = 0
+    begin
+      puts 'Room Type (standard/deluxe/suite):'
+      room_type = gets.chomp.strip.downcase
 
-    puts 'Price per night($):'
-    price = gets.chomp.strip
+      if (room_type == "")
+        if(count < 2)
+          puts 'Please enter room type first.'
+          count += 1
+          raise
+        else
+          puts 'You have reached maximum attempt.'
+          Manager.new(@email).hotel_dashboard(hotel_name)
+        end
+      end
 
-    puts 'Total rooms:'
-    total = gets.chomp.strip.to_i
+      if(!['standard', 'deluxe', 'suite'].include?(room_type))
+        if(count < 2)
+          puts 'Please enter valid room type.'
+          count += 1
+          raise
+        else
+          puts 'You have reached maximum attempt.'
+          Manager.new(@email).hotel_dashboard(hotel_name)
+        end
+      end
+    rescue
+      retry
+    end
+
+    count = 0
+    begin
+      puts 'Price per night($):'
+      price = gets.chomp.strip.to_i
+      
+      if((!price || price <= 0))
+        if(count < 2)
+          puts 'Please enter valid price.'
+          count += 1
+          raise
+        else
+          puts 'You have reached maximum attempt.'
+          Manager.new(@email).hotel_dashboard(hotel_name)
+        end
+      end
+    rescue
+      retry
+    end
+
+    count = 0
+    begin
+      puts 'Total rooms:'
+      total = gets.chomp.strip.to_i
+      
+      if((!total || total <= 0))
+        if(count < 2)
+          puts 'Please enter total rooms.'
+          count += 1
+          raise
+        else
+          puts 'You have reached maximum attempt.'
+          Manager.new(@email).hotel_dashboard(hotel_name)
+        end
+      end
+    rescue
+      retry
+    end
 
     rooms = read_file(ROOMS_FILE)
+    rooms.each do |line|
+      parts = line.split('|')
+      if(parts[1] == hotel_name && parts[2] == room_type)
+        puts "You don't need to create same room type. Add Rooms in existing room type."
+        Manager.new(@email).hotel_dashboard(hotel_name)
+      end
+    end
+
     room_id = rooms.length + 1
 
     data = "#{room_id}|#{hotel_name}|#{room_type}|#{price}|#{total}|#{total}"
@@ -125,15 +197,38 @@ class Room
     end
 
     puts 'Select room number to add rooms:'
-    index = gets.chomp.to_i - 1
-    if hotel_rooms[index].nil?
-      puts 'Invalid selection'
-      Manager.new(@email).hotel_dashboard(hotel_name)
-      return
+    puts 'If you want to return enter * or #'
+
+    index = gets.chomp.strip
+    if(index == '*' || index == '#')
+      return Manager.new(@email).hotel_dashboard(hotel_name)
     end
 
-    puts 'Enter number of rooms to add:'
-    add_count = gets.chomp.to_i
+    index = index.to_i - 1
+    if hotel_rooms[index].nil?
+      puts 'Invalid selection'
+      return Manager.new(@email).hotel_dashboard(hotel_name)
+    end
+
+    count = 0
+    begin
+      puts 'Enter number of rooms to add:'
+      add_count = gets.chomp.strip.to_i
+      
+      if((!add_count || add_count <= 0))
+        if(count < 2)
+          puts 'Please enter valid room numbers.'
+          count += 1
+          raise
+        else
+          puts 'You have reached maximum attempt.'
+          Manager.new(@email).hotel_dashboard(hotel_name)
+        end
+      end
+    rescue
+      retry
+    end
+    
     updated_rooms = []
     rooms.each do |room|
       parts = room.strip.split("|")
@@ -151,13 +246,54 @@ class Room
   end
 
   def book_room(hotel_name, room)
-    puts 'Enter Check-in Date (YYYY-MM-DD):'
-    check_in = gets.chomp
+    count = 1
+    while count <= 3
+      puts 'Enter Check-in Date (YYYY-MM-DD):'
+      input = gets.chomp.strip
 
-    puts 'Enter Check-out Date (YYYY-MM-DD):'
-    check_out = gets.chomp
+      begin
+        check_in = Date.parse(input)
+        break
+      rescue
+        puts 'Invalid date format.'
+      end
 
-    total_amount = (check_out.slice(check_out.length-2, 2).to_i - check_in.slice(check_in.length-2, 2).to_i)*room[3].to_i
+      if count == 3
+        puts 'Maximum attempts reached.'
+        Customer.new(@email).menu
+        return
+      end
+
+      count += 1
+    end
+
+    count = 1
+    while count <= 3
+      puts 'Enter Check-out Date (YYYY-MM-DD):'
+      input = gets.chomp.strip
+
+      begin
+        check_out = Date.parse(input)
+        if check_out > check_in
+          break
+        else
+          puts 'Check-out date must be after check-in date.'
+        end
+      rescue
+        puts 'Invalid date format.'
+      end
+
+      if count == 3
+        puts 'Maximum attempts reached.'
+        Customer.new(@email).menu
+        return
+      end
+
+      count += 1
+    end
+
+    nights = (check_out - check_in).to_i
+    total_amount = nights * room[3].to_i
 
     bookings = read_file(BOOKINGS_FILE)
     booking_id = bookings.length + 1
@@ -167,7 +303,10 @@ class Room
 
     update_room_availability(hotel_name, room[2], -1)
 
-    puts "Booking successful and Bill: $#{total_amount}"
+    puts "Booking successful!"
+    puts "Total nights: #{nights}"
+    puts "Bill Amount: $#{total_amount}"
+
     Customer.new(@email).menu
   end
 
@@ -185,5 +324,4 @@ class Room
 
     write_all(ROOMS_FILE, updated)
   end
-
 end

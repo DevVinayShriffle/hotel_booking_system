@@ -5,15 +5,25 @@ module ManagerFileModule
 
   def read_file(file)
     data = []
-    if File.exist?(file)
-      File.open(file, 'r') do |f|
-        IO.foreach(f) {|line| data << line}
+    begin
+      if File.exist?(file)
+        File.open(file, 'r') do |f|
+          IO.foreach(f) {|line| data << line}
+        end
       end
+    rescue
+      puts "Unable to read file."
+      return
     end
     data
   end
 
   def append_file(file, data)
-    File.open(file, 'a'){|f| f.puts(data)}
+    begin
+      File.open(file, 'a'){|f| f.puts(data)}
+    rescue
+      puts "Unable to append file."
+      return
+    end
   end
 end

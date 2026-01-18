@@ -9,13 +9,28 @@ class Main
     choice = gets.chomp.to_i
 
     if (choice == 1)
-      puts 'Enter your name'
-      name = gets.chomp
+      count = 1
+      begin
+        puts 'Enter your name'
+        name = gets.chomp.strip
+        if(name == "")
+          if(count < 3)
+            puts 'Please enter name first.'
+            count += 1
+            raise
+          elsif (count == 3)
+            puts 'You have reached maximum attempt.'
+            main
+          end
+        end
+      rescue
+        retry
+      end
 
       count = 1
       begin
         puts 'Enter your email'
-        email = gets.chomp
+        email = gets.chomp.strip.downcase
         result = Validation.new.email_validation(email)
         if(!result)
           if(count < 3)
@@ -34,7 +49,7 @@ class Main
       count = 1
       begin
         puts 'Enter your Password'
-        password = gets.chomp
+        password = gets.chomp.strip
 
         result = Validation.new.password_validation(password)
         if(!result)
@@ -78,7 +93,7 @@ class Main
       count = 1
       begin
         puts 'Enter your email'
-        email = gets.chomp
+        email = gets.chomp.strip.downcase
         result = Validation.new.email_validation(email)
         if(!result)
           if(count < 3)
@@ -97,8 +112,7 @@ class Main
       count = 1
       begin
         puts 'Enter your Password'
-        password = gets.chomp
-
+        password = gets.chomp.strip
         result = Validation.new.password_validation(password)
         if(!result)
           if(count < 3)

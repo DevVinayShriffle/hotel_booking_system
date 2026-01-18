@@ -1,6 +1,6 @@
 class Validation
 	def email_validation(email)
-		email_regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+		email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 		result = email.match(email_regex)
 
 		if(!result)
@@ -21,7 +21,6 @@ class Validation
 	end
 
 	def role_validation(role)
-		puts role
 		if(["manager", "customer"].include?(role))
 			return true
 		else

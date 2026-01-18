@@ -10,7 +10,7 @@ class Hotel
   end
 
   def index
-    if (@role.include?("manager"))
+    if (@role.include?('manager'))
       hotels = read_file(HOTELS_FILE)
       my_hotels = []
 
@@ -21,22 +21,52 @@ class Hotel
 
       if my_hotels.empty?
         puts 'No any hotels found'
-        return Manager.new.menu
+        return Manager.new(@email).menu
       end
 
       return my_hotels
 
-    elsif (@role.include?("customer"))
+    elsif (@role.include?('customer'))
       view_all_hotels
     end
   end
 
   def create
-   puts 'Enter Hotel Name ' 
-   hotel_name = gets.chomp
-
-   puts 'Enter Location ' 
-   location = gets.chomp
+   count = 1
+    begin
+     puts 'Enter Hotel name'
+     hotel_name = gets.chomp.strip
+     if(hotel_name == "")
+      if(count < 3)
+       puts 'Please enter Hotel name first.'
+       count += 1
+       raise
+      elsif (count == 3)
+       puts 'You have reached maximum attempt.'
+       Manager.new(@email).menu
+      end
+     end
+    rescue
+     retry
+    end
+    
+   count = 1
+    begin
+      puts 'Enter Location'
+      location = gets.chomp.strip
+      if(location == "")
+        if(count < 3)
+          puts 'Please enter Location first.'
+          count += 1
+          raise
+        elsif (count == 3)
+          puts 'You have reached maximum attempt.'
+          Manager.new(@email).menu
+        end
+      end
+    rescue
+      retry
+    end
 
    hotels = read_file(HOTELS_FILE)
    hotel_id = hotels.length + 1
@@ -55,8 +85,7 @@ class Hotel
 
     if hotels.empty?
       puts 'No hotels available'
-      Customer.new(@email).menu
-      return
+      return Customer.new(@email).menu
     end
 
     puts "\nHotels:"
@@ -67,10 +96,10 @@ class Hotel
 
     puts 'Select hotel number:'
     puts 'If you want to exit Enter * or # key'
-    index = gets.chomp
+    index = gets.chomp.strip
 
 
-    if(index.strip == "*" || index.strip == "#")
+    if(index == "*" || index == "#")
       Customer.new(@email).menu
     end
 

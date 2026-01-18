@@ -11,3 +11,6 @@
 11|Hotel depth|UK|vinay@gmail.com
 12|Hotel Tailwind|UK|vinay@gmail.com
 13|Hotel Testing|Bhopal|vinay@gmail.com
+14|Hotel Tastebud|China|admin@gmail.com
+15|Hotel Lotus|Indore|admin@gmail.com
+16|Hotel Mitsubhishi|Japan|admin@gmail.com
