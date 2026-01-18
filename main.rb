@@ -57,7 +57,6 @@ class Main
         role = gets.chomp.strip.downcase
 
         result = Validation.new.role_validation(role)
-        puts result
         if(!result)
           if(count < 3)
             puts 'Please enter a valid role.(manager/customer)'

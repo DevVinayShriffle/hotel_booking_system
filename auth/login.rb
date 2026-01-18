@@ -5,10 +5,10 @@ class Login
   def login_details(email, password)
     users = read_users
     is_present = false
-
+    
     users.each do |data|
       user = data.split("|")
-      if (user[2] == email && user[3] == password.strip)
+      if (user[2] == email.strip && user[3] == password.strip)
         is_present = true
         puts 'Login Successfully.'
         if (user[4] == 'manager')
@@ -18,10 +18,15 @@ class Login
           # require_relative '../customer/customer'
           Customer.new(user[2]).menu
         end
-      else
-        puts 'Invalid email or password.' 
-        Main.new.main
+      # else
+      #   puts 'Invalid email or password.' 
+      #   Main.new.main
       end
+    end
+
+    if (is_present == false)
+      puts 'Invalid email or password.'
+      Main.new.main
     end
   end
 end

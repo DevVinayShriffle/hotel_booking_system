@@ -12,3 +12,18 @@
 12|8|standard|lav@gmail.com|2026-01-23|2026-01-26|active
 13|8|standard|lav@gmail.com|2026-01-01|2026-01-10|active|900
 14|Taj hotel|deluxe|saras@gmail.com|2026-03-03|2026-03-10|cancelled|3500
+15|Taj hotel|suite|test@gmail.com|2026-02-10|2026-02-15|cancelled|5000
+16|hotel siddhivinayak|standard|test@gmail.com|2026-01-15|2026-01-18|cancelled|1500
+17|8|standard|test@gmail.com|2026-10-10|2026-10-15|cancelled|500
+18|Sunflower hotel|suite|test@gmail.com|2026-02-10|2026-02-20|cancelled|6000
+19|Radison delux|delux|test@gmail.com|2026-02-02|2026-02-06|cancelled|800
+20|Radison delux|suite|test@gmail.com|2026-01-10|2026-01-15|cancelled|2500
+21|hotel siddhivinayak|standard|test@gmail.com|2026-01-15|2026-01-20|active|2500
+22|Taj hotel|suite|test@gmail.com|2026-01-10|2026-02-12|cancelled|2000
+23|Hotel Blue|standard|test@gmail.com|2026-01-10|2026-01-15|active|10000
+24|Hotel Testing|suite|test@gmail.com|2026-01-01|2026-01-10|active|1800
+25|Hotel Testing|suite|test@gmail.com|2026-02-15|2026-02-18|cancelled|600
+26|Hotel Testing|standard|test@gmail.com|2026-01-13|2026-01-14|active|50
+27|Hotel Testing|standard|test@gmail.com|2026-12-01|2026-12-10|active|450
+28|Hotel Testing|deluxe|test@gmail.com|2026-01-05|2026-01-15|cancelled|1000
+29|Hotel Testing|deluxe|test@gmail.com|2026-02-06|2026-02-08|active|200

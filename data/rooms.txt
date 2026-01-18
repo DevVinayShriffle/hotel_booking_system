@@ -1,11 +1,13 @@
-1|Hotel Blue|standard|2000|10|6
-4|hotel siddhivinayak|standard|500|5|5
-5|Sunflower hotel|suite|600|10|10
-6|8|standard|100|20|18
-7|Taj hotel|deluxe|500|5|5
-8|Taj hotel|deluxe|500|5|5
-7|Radison delux|standard|100|10|10
-8|Radison delux|delux|200|12|12
-9|Radison delux|suite|500|15|15
-10|Taj hotel|standard|100|18|18
-11|Taj hotel|suite|1000|8|8
+1|Hotel Blue|standard|2000|10|5
+2|hotel siddhivinayak|standard|500|5|3
+3|Sunflower hotel|suite|600|10|10
+4|8|standard|100|20|17
+5|Taj hotel|deluxe|500|5|5
+6|Radison delux|standard|100|10|10
+7|Radison delux|delux|200|12|12
+8|Radison delux|suite|500|15|15
+9|Taj hotel|standard|100|18|17
+10|Taj hotel|suite|1000|8|8
+11|Hotel Testing|deluxe|100|8|7
+12|Hotel Testing|suite|200|18|17
+13|Hotel Testing|standard|50|10|8

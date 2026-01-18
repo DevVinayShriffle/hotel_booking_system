@@ -1,8 +1,9 @@
 require_relative '../manager/manager_file_module'
+require_relative '../customer/customer_file_module'
 require_relative '../loader'
 
 class Room
-  # include CustomerFileModule
+  include CustomerFileModule
   include ManagerFileModule
   def initialize (email, role)
     @email = email
@@ -52,13 +53,13 @@ class Room
 
   def create(hotel_name)
     puts 'Room Type (standard/deluxe/suite):'
-    room_type = gets.chomp.downcase
+    room_type = gets.chomp.strip.downcase
 
     puts 'Price per night($):'
-    price = gets.chomp
+    price = gets.chomp.strip
 
     puts 'Total rooms:'
-    total = gets.chomp.to_i
+    total = gets.chomp.strip.to_i
 
     rooms = read_file(ROOMS_FILE)
     room_id = rooms.length + 1
@@ -164,7 +165,7 @@ class Room
     bookings = read_file(BOOKINGS_FILE)
     booking_id = bookings.length + 1
 
-    line = "#{booking_id}|#{hotel_name}|#{room[2]}|#{@customer_email}|#{check_in}|#{check_out}|active|#{total_amount}"
+    line = "#{booking_id}|#{hotel_name}|#{room[2]}|#{@email}|#{check_in}|#{check_out}|active|#{total_amount}"
     append_file(BOOKINGS_FILE, line)
 
     update_room_availability(hotel_name, room[2], -1)

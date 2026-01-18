@@ -7,3 +7,4 @@
 7|ganesh|ganesh12@gmail.com|Ganesh@1|customer
 8|happy|happy@gmail.com|Happy@12|customer
 9|saras|saras@gmail.com|Saras@12|customer
+10|dev_test|test@gmail.com|Test@12|customer

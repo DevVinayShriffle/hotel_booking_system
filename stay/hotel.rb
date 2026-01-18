@@ -81,11 +81,11 @@ class Hotel
       end
 
       puts 'Select hotel number:'
-      puts 'If you want to exit Enter * key'
+      puts 'If you want to exit Enter * or # key'
       index = gets.chomp
 
 
-      if(index.strip == "*")
+      if(index.strip == "*" || index.strip == "#")
         Customer.new(@email).menu
       end
 
