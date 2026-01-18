@@ -1,9 +1,9 @@
-# require_relative '../manager/manager_file_module'
 require_relative '../loader.rb'
 require_relative '../customer/customer_file_module.rb'
 
 class Booking
   include CustomerFileModule
+  
 	def initialize(email, role)
 		@email = email
 		@role = role

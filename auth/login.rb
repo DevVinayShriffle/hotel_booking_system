@@ -1,7 +1,9 @@
 require_relative 'user_file_module'
 require_relative '../loader'
+
 class Login
   include UserFileModule
+
   def login_details(email, password)
     users = read_users
     is_present = false
@@ -12,15 +14,10 @@ class Login
         is_present = true
         puts 'Login Successfully.'
         if (user[4] == 'manager')
-          # require_relative '../manager/manager'
           Manager.new(user[2]).menu
         elsif (user[4] == 'customer')
-          # require_relative '../customer/customer'
           Customer.new(user[2]).menu
         end
-      # else
-      #   puts 'Invalid email or password.' 
-      #   Main.new.main
       end
     end
 
@@ -30,5 +27,3 @@ class Login
     end
   end
 end
-
-# data 1|Vinay|vinay@gmail.com|1234|manager

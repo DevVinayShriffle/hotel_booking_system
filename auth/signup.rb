@@ -22,5 +22,3 @@ class Signup
     Main.new.main
   end
 end
-
-# data 1|Vinay|vinay@gmail.com|1234|manager

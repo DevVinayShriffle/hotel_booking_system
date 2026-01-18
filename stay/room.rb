@@ -5,14 +5,11 @@ require_relative '../loader'
 class Room
   include CustomerFileModule
   include ManagerFileModule
+
   def initialize (email, role)
     @email = email
     @role = role
   end
-
-  #list
-  # def index
-  # end
 
   def show_rooms(hotel_name)
       rooms = read_file(ROOMS_FILE)
@@ -170,7 +167,6 @@ class Room
 
     update_room_availability(hotel_name, room[2], -1)
 
-    # total_amount = (check_out.slice(check_out.length-2, 2).to_i - check_in.slice(check_in.length-2, 2).to_i)*room[3].to_i
     puts "Booking successful and Bill: $#{total_amount}"
     Customer.new(@email).menu
   end
@@ -190,6 +186,4 @@ class Room
     write_all(ROOMS_FILE, updated)
   end
 
-  # def destroy
-  # end
 end
