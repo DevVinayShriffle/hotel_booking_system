@@ -67,7 +67,7 @@ class Manager
     when 2
       Room.new(@manager_email, @role).create(hotel_name)
     when 3
-      Room.new(@manager_email , @role).update(hotel_name)
+      Room.new(@manager_email , @role).add_room(hotel_name)
     when 4
       menu
     else

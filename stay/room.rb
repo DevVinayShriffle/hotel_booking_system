@@ -102,7 +102,7 @@ class Room
     Manager.new(@email).hotel_dashboard(hotel_name)
   end
 
-  def update(hotel_name)
+  def add_room(hotel_name)
     rooms = read_file(ROOMS_FILE)
     hotel_rooms = []
     rooms.each do |room|

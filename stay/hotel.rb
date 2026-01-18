@@ -27,7 +27,7 @@ class Hotel
       return my_hotels
 
     elsif (@role.include?("customer"))
-      view_hotels
+      view_all_hotels
     end
   end
 
@@ -50,7 +50,7 @@ class Hotel
    Manager.new(@email).menu
   end
 
-  def view_hotels
+  def view_all_hotels
     hotels = read_file(HOTELS_FILE)
 
     if hotels.empty?
