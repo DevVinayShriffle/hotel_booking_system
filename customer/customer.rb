@@ -1,5 +1,3 @@
-require_relative '../loader'
-
 class Customer
   def initialize(customer_email)
     @customer_email = customer_email

@@ -1,7 +1,3 @@
-require_relative '../manager/manager_file_module'
-require_relative '../customer/customer_file_module'
-require_relative '../loader'
-
 class Room
   include CustomerFileModule
   include ManagerFileModule

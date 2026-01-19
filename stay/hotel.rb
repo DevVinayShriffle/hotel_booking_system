@@ -1,6 +1,3 @@
-require_relative '../manager/manager_file_module'
-require_relative '../loader'
-
 class Hotel
   include ManagerFileModule
 

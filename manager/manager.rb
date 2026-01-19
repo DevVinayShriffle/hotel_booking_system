@@ -1,5 +1,3 @@
-require_relative '../loader'
-
 class Manager
   def initialize (email)
     @manager_email = email

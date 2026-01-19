@@ -1,6 +1,3 @@
-require_relative 'user_file_module'
-require_relative '../loader'
-
 class Login
   include UserFileModule
 

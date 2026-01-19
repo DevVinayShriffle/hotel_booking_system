@@ -14,3 +14,4 @@
 14|Hotel Tastebud|China|admin@gmail.com
 15|Hotel Lotus|Indore|admin@gmail.com
 16|Hotel Mitsubhishi|Japan|admin@gmail.com
+17|Hotel lilly|UK|admin@gmail.com

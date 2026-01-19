@@ -1,6 +1,3 @@
-require_relative '../loader.rb'
-require_relative '../customer/customer_file_module.rb'
-
 class Booking
   include CustomerFileModule
   

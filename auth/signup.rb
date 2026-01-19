@@ -1,4 +1,3 @@
-require_relative 'user_file_module'
 class Signup
   include UserFileModule
   def signup_details (name, email, password, role)
