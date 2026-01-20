@@ -1,9 +1,9 @@
 class Input
-  # @main = Main.new
   def initialize
     @count = 1
-    @main = Main.new
+    # @main = Main.new
   end
+  # main = Main.new
 
   def input_name
     begin
@@ -16,7 +16,7 @@ class Input
           raise
         elsif (@count == 3)
           puts 'You have reached maximum attempt.'
-          @main.main
+          Main.new.main
         end
       end
     rescue
@@ -37,7 +37,7 @@ class Input
             raise
           elsif(@count == 3)
             puts 'You have reached maximum attempt.'
-            @main.main
+            Main.new.main
           end
         end
       rescue
@@ -59,7 +59,7 @@ class Input
             raise
           else
             puts 'You have reached maximum attempt.'
-            @main.main
+            Main.new.main
           end
         end
       rescue
@@ -81,7 +81,7 @@ class Input
             raise
           else
             puts 'You have reached maximum attempt.'
-            @main.main
+            Main.new.main
           end
         end
       rescue
