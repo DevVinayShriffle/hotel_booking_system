@@ -50,73 +50,76 @@ class Room
   end
 
   def create(hotel_name)
-    count = 0
-    begin
-      puts 'Room Type (standard/deluxe/suite):'
-      room_type = gets.chomp.strip.downcase
+    # count = 0
+    # # begin
+    # #   puts 'Room Type (standard/deluxe/suite):'
+    # #   room_type = gets.chomp.strip.downcase
 
-      if (room_type == "")
-        if(count < 2)
-          puts 'Please enter room type first.'
-          count += 1
-          raise
-        else
-          puts 'You have reached maximum attempt.'
-          Manager.new(@email).hotel_dashboard(hotel_name)
-        end
-      end
+    # #   if (room_type == "")
+    # #     if(count < 2)
+    # #       puts 'Please enter room type first.'
+    # #       count += 1
+    # #       raise
+    # #     else
+    # #       puts 'You have reached maximum attempt.'
+    # #       Manager.new(@email).hotel_dashboard(hotel_name)
+    # #     end
+    # #   end
 
-      if(!['standard', 'deluxe', 'suite'].include?(room_type))
-        if(count < 2)
-          puts 'Please enter valid room type.'
-          count += 1
-          raise
-        else
-          puts 'You have reached maximum attempt.'
-          Manager.new(@email).hotel_dashboard(hotel_name)
-        end
-      end
-    rescue
-      retry
-    end
+    # #   if(!['standard', 'deluxe', 'suite'].include?(room_type))
+    # #     if(count < 2)
+    # #       puts 'Please enter valid room type.'
+    # #       count += 1
+    # #       raise
+    # #     else
+    # #       puts 'You have reached maximum attempt.'
+    # #       Manager.new(@email).hotel_dashboard(hotel_name)
+    # #     end
+    # #   end
+    # # rescue
+    # #   retry
+    # # end
+    room_type = Input.new.input_room_type(@email, hotel_name)
 
-    count = 0
-    begin
-      puts 'Price per night($):'
-      price = gets.chomp.strip.to_i
+    # count = 0
+    # begin
+    #   puts 'Price per night($):'
+    #   price = gets.chomp.strip.to_i
       
-      if((!price || price <= 0))
-        if(count < 2)
-          puts 'Please enter valid price.'
-          count += 1
-          raise
-        else
-          puts 'You have reached maximum attempt.'
-          Manager.new(@email).hotel_dashboard(hotel_name)
-        end
-      end
-    rescue
-      retry
-    end
+    #   if((!price || price <= 0))
+    #     if(count < 2)
+    #       puts 'Please enter valid price.'
+    #       count += 1
+    #       raise
+    #     else
+    #       puts 'You have reached maximum attempt.'
+    #       Manager.new(@email).hotel_dashboard(hotel_name)
+    #     end
+    #   end
+    # rescue
+    #   retry
+    # end
+    price = Input.new.input_price(@email, hotel_name)
 
-    count = 0
-    begin
-      puts 'Total rooms:'
-      total = gets.chomp.strip.to_i
+    # count = 0
+    # begin
+    #   puts 'Total rooms:'
+    #   total = gets.chomp.strip.to_i
       
-      if((!total || total <= 0))
-        if(count < 2)
-          puts 'Please enter total rooms.'
-          count += 1
-          raise
-        else
-          puts 'You have reached maximum attempt.'
-          Manager.new(@email).hotel_dashboard(hotel_name)
-        end
-      end
-    rescue
-      retry
-    end
+    #   if((!total || total <= 0))
+    #     if(count < 2)
+    #       puts 'Please enter total rooms.'
+    #       count += 1
+    #       raise
+    #     else
+    #       puts 'You have reached maximum attempt.'
+    #       Manager.new(@email).hotel_dashboard(hotel_name)
+    #     end
+    #   end
+    # rescue
+    #   retry
+    # end
+    total = Input.new.input_total_rooms(@email, hotel_name)
 
     rooms = read_file(ROOMS_FILE)
     rooms.each do |line|
@@ -182,8 +185,7 @@ class Room
 
     if hotel_rooms.empty? 
       puts 'No rooms found for this hotel'
-      Manager.new(@email).hotel_dashboard(hotel_name)
-      return
+      return Manager.new(@email).hotel_dashboard(hotel_name)
     end
 
     puts "\nRoom Types:"
@@ -206,24 +208,25 @@ class Room
       return Manager.new(@email).hotel_dashboard(hotel_name)
     end
 
-    count = 0
-    begin
-      puts 'Enter number of rooms to add:'
-      add_count = gets.chomp.strip.to_i
+    # count = 0
+    # begin
+    #   puts 'Enter number of rooms to add:'
+    #   add_count = gets.chomp.strip.to_i
       
-      if((!add_count || add_count <= 0))
-        if(count < 2)
-          puts 'Please enter valid room numbers.'
-          count += 1
-          raise
-        else
-          puts 'You have reached maximum attempt.'
-          Manager.new(@email).hotel_dashboard(hotel_name)
-        end
-      end
-    rescue
-      retry
-    end
+    #   if((!add_count || add_count <= 0))
+    #     if(count < 2)
+    #       puts 'Please enter valid room numbers.'
+    #       count += 1
+    #       raise
+    #     else
+    #       puts 'You have reached maximum attempt.'
+    #       Manager.new(@email).hotel_dashboard(hotel_name)
+    #     end
+    #   end
+    # rescue
+    #   retry
+    # end
+    add_count = Input.new.input_add_room(@email, hotel_name)
     
     updated_rooms = []
     rooms.each do |room|
@@ -242,51 +245,51 @@ class Room
   end
 
   def book_room(hotel_name, room)
-    count = 1
-    while count <= 3
-      puts 'Enter Check-in Date (YYYY-MM-DD):'
-      input = gets.chomp.strip
+    # count = 1
+    # while count <= 3
+    #   puts 'Enter Check-in Date (YYYY-MM-DD):'
+    #   input = gets.chomp.strip
 
-      begin
-        check_in = Date.parse(input)
-        break
-      rescue
-        puts 'Invalid date format.'
-      end
+    #   begin
+    #     check_in = Date.parse(input)
+    #     break
+    #   rescue
+    #     puts 'Invalid date format.'
+    #   end
 
-      if count == 3
-        puts 'Maximum attempts reached.'
-        Customer.new(@email).menu
-        return
-      end
+    #   if count == 3
+    #     puts 'Maximum attempts reached.'
+    #     Customer.new(@email).menu
+    #     return
+    #   end
+    #   count += 1
+    # end
+    check_in = Input.new.input_check_in(@email)
 
-      count += 1
-    end
+    # count = 1
+    # while count <= 3
+    #   puts 'Enter Check-out Date (YYYY-MM-DD):'
+    #   input = gets.chomp.strip
 
-    count = 1
-    while count <= 3
-      puts 'Enter Check-out Date (YYYY-MM-DD):'
-      input = gets.chomp.strip
+    #   begin
+    #     check_out = Date.parse(input)
+    #     if check_out > check_in
+    #       break
+    #     else
+    #       puts 'Check-out date must be after check-in date.'
+    #     end
+    #   rescue
+    #     puts 'Invalid date format.'
+    #   end
 
-      begin
-        check_out = Date.parse(input)
-        if check_out > check_in
-          break
-        else
-          puts 'Check-out date must be after check-in date.'
-        end
-      rescue
-        puts 'Invalid date format.'
-      end
-
-      if count == 3
-        puts 'Maximum attempts reached.'
-        Customer.new(@email).menu
-        return
-      end
-
-      count += 1
-    end
+    #   if count == 3
+    #     puts 'Maximum attempts reached.'
+    #     Customer.new(@email).menu
+    #     return
+    #   end
+    #   count += 1
+    # end
+    check_out = Input.new.input_check_out(@email, check_in)
 
     nights = (check_out - check_in).to_i
     total_amount = nights * room[3].to_i

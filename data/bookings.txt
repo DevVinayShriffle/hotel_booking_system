@@ -9,7 +9,7 @@
 9|Radison delux|deluxe|lav@gmail.com|2026-01-23|2026-01-31|active
 10|8|standard|lav@gmail.com|2026-05-10|2026-05-15|cancelled
 11|Taj hotel|deluxe|lav@gmail.com|2026-02-18|2026-02-25|cancelled
-12|8|standard|lav@gmail.com|2026-01-23|2026-01-26|active
+12|8|standard|lav@gmail.com|2026-01-23|2026-01-26|cancelled
 13|8|standard|lav@gmail.com|2026-01-01|2026-01-10|active|900
 14|Taj hotel|deluxe|saras@gmail.com|2026-03-03|2026-03-10|cancelled|3500
 15|Taj hotel|suite|test@gmail.com|2026-02-10|2026-02-15|cancelled|5000
@@ -29,3 +29,4 @@
 29|Hotel Testing|deluxe|test@gmail.com|2026-02-06|2026-02-08|active|200
 30|Hotel Tastebud|standard|satoshi@gmail.com|2026-01-01|2026-01-21|cancelled|2000
 31|Hotel Tastebud|deluxe|satoshi@gmail.com|2025-12-12|2026-01-02|active|3150
+32|Hotel Astha|deluxe|lav@gmail.com|2026-02-11|2026-03-08|active|1250
