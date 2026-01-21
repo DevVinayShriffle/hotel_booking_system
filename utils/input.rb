@@ -26,65 +26,65 @@ class Input
   end
 
   def input_email
-      begin
-        puts 'Enter your email'
-        email = gets.chomp.strip.downcase
-        result = Validation.new.email_validation(email)
-        if(!result)
-          if(@count < 3)
-            puts 'Please enter a valid email address.'
-            @count += 1
-            raise
-          elsif(@count == 3)
-            puts 'You have reached maximum attempt.'
-            Main.new.main
-          end
+    begin
+      puts 'Enter your email'
+      email = gets.chomp.strip.downcase
+      result = Validation.new.email_validation(email)
+      if(!result)
+        if(@count < 3)
+          puts 'Please enter a valid email address.'
+          @count += 1
+          raise
+        elsif(@count == 3)
+          puts 'You have reached maximum attempt.'
+          Main.new.main
         end
-      rescue
-        retry
       end
-      return email
+    rescue
+      retry
+    end
+    return email
   end
 
   def input_password
-      begin
-        puts 'Enter your Password'
-        password = gets.chomp.strip
-        result = Validation.new.password_validation(password)
-        if(!result)
-          if(@count < 3)
-            puts 'Password must have 6-8 characters long, one special character and a uppercase character.'
-            @count += 1
-            raise
-          else
-            puts 'You have reached maximum attempt.'
-            Main.new.main
-          end
+    begin
+      puts 'Enter your Password'
+      password = gets.chomp.strip
+      result = Validation.new.password_validation(password)
+      if(!result)
+        if(@count < 3)
+          puts 'Password must have 6-8 characters long, one special character and a uppercase character.'
+          @count += 1
+          raise
+        else
+          puts 'You have reached maximum attempt.'
+          Main.new.main
         end
-      rescue
-        retry
       end
+    rescue
+      retry
+    end
     return password
   end
 
   def input_role
-      begin
-        puts 'Enter your Role(manager/customer)'
-        role = gets.chomp.strip.downcase
-        result = Validation.new.role_validation(role)
-        if(!result)
-          if(@count < 3)
-            puts 'Please enter a valid role.(manager/customer)'
-            @count += 1
-            raise
-          else
-            puts 'You have reached maximum attempt.'
-            Main.new.main
-          end
+    begin
+      puts 'Enter your Role(manager/customer)'
+      role = gets.chomp.strip.downcase
+      result = Validation.new.role_validation(role)
+      if(!result)
+        if(@count < 3)
+          puts 'Please enter a valid role.(manager/customer)'
+          @count += 1
+          raise
+        else
+          puts 'You have reached maximum attempt.'
+          Main.new.main
         end
-      rescue
-        retry
       end
+    rescue
+      retry
+    end
     return role
   end
 
@@ -239,20 +239,20 @@ class Input
 
   def input_hotel_name(email)
     begin
-     puts 'Enter Hotel name'
-     hotel_name = gets.chomp.strip
-     if(hotel_name == "")
-      if(@count < 3)
-       puts 'Please enter Hotel name first.'
-       @count += 1
-       raise
+      puts 'Enter Hotel name'
+      hotel_name = gets.chomp.strip
+      if(hotel_name == "")
+        if(@count < 3)
+        puts 'Please enter Hotel name first.'
+        @count += 1
+        raise
       elsif (@count == 3)
-       puts 'You have reached maximum attempt.'
-       Manager.new(email).menu
+        puts 'You have reached maximum attempt.'
+        Manager.new(email).menu
       end
-     end
+    end
     rescue
-     retry
+      retry
     end
     return hotel_name
   end

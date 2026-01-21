@@ -29,54 +29,19 @@ class Hotel
   end
 
   def create
-  #  count = 1
-  #   begin
-  #    puts 'Enter Hotel name'
-  #    hotel_name = gets.chomp.strip
-  #    if(hotel_name == "")
-  #     if(count < 3)
-  #      puts 'Please enter Hotel name first.'
-  #      count += 1
-  #      raise
-  #     elsif (count == 3)
-  #      puts 'You have reached maximum attempt.'
-  #      Manager.new(@email).menu
-  #     end
-  #    end
-  #   rescue
-  #    retry
-  #   end
     hotel_name = Input.new.input_hotel_name(@email)
-    
-  #  count = 1
-  #   begin
-  #     puts 'Enter Location'
-  #     location = gets.chomp.strip
-  #     if(location == "")
-  #       if(count < 3)
-  #         puts 'Please enter Location first.'
-  #         count += 1
-  #         raise
-  #       elsif (count == 3)
-  #         puts 'You have reached maximum attempt.'
-  #         Manager.new(@email).menu
-  #       end
-  #     end
-  #   rescue
-  #     retry
-  #   end
     location = Input.new.input_location(@email)
 
-   hotels = read_file(HOTELS_FILE)
-   hotel_id = hotels.length + 1
+    hotels = read_file(HOTELS_FILE)
+    hotel_id = hotels.length + 1
 
-   data = "#{hotel_id}|#{hotel_name}|#{location}|#{@email}"
+    data = "#{hotel_id}|#{hotel_name}|#{location}|#{@email}"
 
-   append_file(HOTELS_FILE, data)
-   puts 'Hotel created successfully.'
-   Manager.new(@email).menu
+    append_file(HOTELS_FILE, data)
+    puts 'Hotel created successfully.'
+    Manager.new(@email).menu
   rescue
-   Manager.new(@email).menu
+    Manager.new(@email).menu
   end
 
   def view_all_hotels
